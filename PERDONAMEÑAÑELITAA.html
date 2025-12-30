@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti, Ñañelaa 💗</title>
+
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    max-width: 560px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: #e75480;
+}
+
+p {
+    color: #444;
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+.message {
+    font-size: 17px;
+    color: #e75480;
+    font-weight: bold;
+    min-height: 55px;
+    margin-top: 18px;
+}
+
+.buttons {
+    margin-top: 22px;
+}
+
+button {
+    margin: 8px;
+    padding: 10px 26px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    background-color: #e75480;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+button.no {
+    background-color: #b0b0b0;
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 22px;
+    animation: floatUp 3s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-650px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.final {
+    display: none;
+    margin-top: 22px;
+    font-size: 20px;
+    color: #e75480;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Para ti, Ñañelaa 💗</h1>
+
+    <p>
+        A veces soy bien mensa y no siempre sé decir las cosas como quiero,
+        pero lo que sí tengo claro es que te quiero muchísimo
+        y valoro demasiado nuestra amistad.
+    </p>
+
+    <p>
+        Así que hice esto solo para ti 🫶
+    </p>
+
+    <div class="message" id="message">
+        Presiona un botón 💞
+    </div>
+
+    <div class="buttons" id="buttons">
+        <button class="no" onclick="no()">No 😒</button>
+        <button onclick="si()">Sí 🥹</button>
+    </div>
+
+    <div class="final" id="final">
+        💖 Gracias por perdonarme y te quiero hoy, mañana y siempre 💖
+    </div>
+
+    <footer style="margin-top:25px; font-size:14px; color:#777;">
+        Con todo mi cariño,<br>
+        <strong>Yuli</strong>
+    </footer>
+</div>
+
+<script>
+let contador = 0;
+
+const mensajes = [
+    "Te quiero muchísimo, más de lo que a veces puedo explicar 💗",
+    "Nuestra amistad es algo que valoro de verdad 🫶",
+    "Prometo esforzarme cada día para ser mejor amiga 🤍",
+    "Gracias por seguir aquí, incluso cuando soy mensa 😅",
+    "Eres una persona muy especial para mí ✨",
+    "No quiero perder lo bonito que tenemos 🥹",
+    "Tu amistad es uno de mis lugares seguros 💕",
+    "Siempre voy a querer verte feliz 🌸",
+    "No importa el momento, te quiero 💞",
+    "Ok… ya no hay escapatoria 😌💖"
+];
+
+function mostrarMensaje() {
+    const msg = document.getElementById("message");
+    msg.textContent = mensajes[contador % mensajes.length];
+    contador++;
+}
+
+function corazones(cantidad) {
+    for (let i = 0; i < cantidad; i++) {
+        const heart = document.createElement("div");
+        heart.className = "floating-heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+    }
+}
+
+function no() {
+    mostrarMensaje();
+    corazones(6);
+
+    const cont = document.getElementById("buttons");
+    cont.innerHTML = "";
+
+    if (contador < mensajes.length - 1) {
+        const btnNo = document.createElement("button");
+        btnNo.className = "no";
+        btnNo.textContent = "No 😒";
+        btnNo.onclick = no;
+        cont.appendChild(btnNo);
+    }
+
+    for (let i = 0; i < contador + 1; i++) {
+        const btnSi = document.createElement("button");
+        btnSi.textContent = "Sí 💕";
+        btnSi.onclick = si;
+        cont.appendChild(btnSi);
+    }
+}
+
+function si() {
+    mostrarMensaje();
+    corazones(18);
+
+    if (contador >= mensajes.length) {
+        document.getElementById("buttons").style.display = "none";
+        document.getElementById("final").style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>
